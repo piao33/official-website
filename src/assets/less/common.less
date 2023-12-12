@@ -1,0 +1,58 @@
+@blue: #2352a4;
+@blue-active: #032a6e;
+@blue-light: #4aafd7;
+@blue-dark: #133e8a;
+@black: #495060;
+@gray: #838383;
+
+@nav-height: 80px;
+@nav-height-minus: -80px;
+@footer-height: 230px;
+@footer-height2: 360px;
+:root{
+    --el-color-primary: #2352a4;
+    --el-color-primary-dark-2: #1f488e;
+    --el-color-primary-light-3: #275198;
+    --el-color-primary-light-5: #49679b;
+    --el-color-primary-light-7: #576f97;
+    --el-color-primary-light-8: #5973a0;
+    --el-color-primary-light-9: #6e82a5;
+}
+.marginAuto{
+    margin: 0 auto;
+}
+
+.one-line-ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.multiple-line-ellipsis{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient:vertical;
+}
+.multiple-line-ellipsis-10{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient:vertical;
+}
+
+.max1280{
+    max-width: 1280px;
+    padding: 0 16px;
+    @media (max-width: 1280px){
+        max-width: 992px;
+        padding: 0 16px;
+        @media (max-width: 992px){
+            max-width: 768px;
+            padding: 0 16px;
+        }
+    }
+}
+
+
