@@ -1,9 +1,9 @@
 <template>
     <footer class="footer-content">
         <el-row align="middle">
-            <el-col :md="9" :xs="24">
+            <!-- <el-col :md="9" :xs="24">
                 <img src="@/assets/img/code.png"/>
-            </el-col>
+            </el-col> -->
             <el-col :md="15" :sm="24">
                 <div class="info">
                     <h5 class="">联系我们</h5>
@@ -12,7 +12,7 @@
                         <li>电话：0431-80534512</li>
                         <li>邮箱：br@jlbairong.com</li>
                     </ul>
-                    <p>版权所有©吉林省百融信息技术有限公司 吉ICP备20001905号-1</p>
+                    <!-- <p>版权所有©吉林省百融信息技术有限公司 吉ICP备20001905号-1</p> -->
                 </div>
             </el-col>
         </el-row>

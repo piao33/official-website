@@ -2,7 +2,7 @@
     <nav>
         <div class="nav-box">
             <div class="logo-box">
-                <img src="@/assets/img/logo.png" alt="logo" @click="$router.push('home')">
+                <!-- <img src="@/assets/img/logo.png" alt="logo" @click="$router.push('home')"> -->
             </div>
             <div class="menu-box">
                 <div class="menu-item"
