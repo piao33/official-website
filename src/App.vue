@@ -14,6 +14,7 @@ function calcKeepAliveRouters() {
     return arr;
 }
 let keepAliveRouters = calcKeepAliveRouters();
+console.log(keepAliveRouters)
 </script>
 
 <template>

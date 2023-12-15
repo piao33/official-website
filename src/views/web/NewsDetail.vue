@@ -29,7 +29,7 @@
 </script>
 <style lang="less" scoped>
     .newsDetail{
-        .max1280();
+        .max1200();
         .marginAuto();
         .title-box{
             text-align: left;

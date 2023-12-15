@@ -127,12 +127,12 @@ import { useRoute } from 'vue-router';
     
     text-align: center;
     .con{
-        .max1280();
+        .max1200();
         .marginAuto();
     }
     .title {
         font-size: 32px;
-        margin: 50px 0;
+        padding: 50px 0;
         font-weight: 500;
     }
 

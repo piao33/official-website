@@ -28,7 +28,7 @@
     </div>
 </template>
 <script setup>
-    import { onActivated, reactive, ref } from 'vue';
+    import { onActivated, ref } from 'vue';
     import { useRouter } from 'vue-router';
     import { getNewsListApi }  from '@/api/news';
     import default1 from '@/assets/img/default1.jpg';
@@ -53,7 +53,7 @@
     
     onActivated(()=>{
         // onactiive
-        // console.log('active')
+        console.log('active')
     })
 
     function jumpToDetail(id) {
@@ -81,9 +81,11 @@
 </script>
 <style lang="less" scoped>
     .news{
-        .max1280();
+        .max1200();
         .marginAuto();
+
         ul{
+            padding-top: 24px;
             li{
                 display: flex;
                 margin-bottom: 30px;

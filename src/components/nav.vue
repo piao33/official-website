@@ -107,7 +107,7 @@
         background-color: #fff;
     }
     .nav-box{
-        .max1280();
+        .max1200();
         .marginAuto();
         width: 100%;
         height: @nav-height;

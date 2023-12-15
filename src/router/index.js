@@ -4,7 +4,7 @@ const router = createRouter({
   base: '/',
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from ,savedPosition){
-
+    console.log(savedPosition)
     if(savedPosition) {
       return savedPosition;
     }else if (to.hash) {
@@ -12,7 +12,7 @@ const router = createRouter({
         selector: to.hash
       };
     } else {
-      return { x: 0, y: 0 };
+      return { left: 0, top: 0 };
     }
   },
   routes: [

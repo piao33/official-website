@@ -16,6 +16,22 @@
                 </div>
             </el-col>
         </el-row>
+        <el-backtop :right="10" :bottom="20">
+            <div
+                style="
+                    height: 100%;
+                    width: 100%;
+                    background-color: var(--el-bg-color-overlay);
+                    box-shadow: var(--el-box-shadow-lighter);
+                    text-align: center;
+                    border-radius: 2px;
+                    line-height: 40px;
+                    color: #495060;
+                "
+            >
+                <i class="fa fa-arrow-up"></i>
+            </div>
+        </el-backtop>
     </footer>
 </template>
 
@@ -32,7 +48,7 @@
     }
     .el-row{
         text-align: center;
-        .max1280();
+        .max1200();
         .marginAuto();
     }
     .info{
