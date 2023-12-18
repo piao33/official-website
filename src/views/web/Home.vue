@@ -26,10 +26,10 @@
                     </el-col>
                     <el-col :md="10" :sm="24">
                         <ul class="history-img">
-                            <li><div class="img-box"><img src="@/assets/img/kjy.jpg" alt=""></div></li>
+                            <li><div class="img-box"><img src="@/assets/img/kjy13.jpg" alt=""></div></li>
                             <li><div class="img-box"><img src="@/assets/img/kjy11.jpg" alt=""></div></li>
                             <li><div class="img-box"><img src="@/assets/img/kjy12.jpg" alt=""></div></li>
-                            <li><div class="img-box"><img src="@/assets/img/kjy1.jpg" alt=""></div></li>
+                            <li><div class="img-box"><img src="@/assets/img/kjy14.jpg" alt=""></div></li>
                         </ul>
                     </el-col>
                 </el-row>
@@ -275,12 +275,15 @@ const nextSlide = ()=>{
                     width: 50%;
                     padding: 10px;
                     position: relative;
+                    
                     .img-box{
+                        height: 100%;
                         width: 100%;
                         overflow: hidden;
                     }
                     img{
-                        width: 100%; height: 100%;
+                        width: 100%; 
+                        height: 100%;
                         object-fit: cover;
                         vertical-align: top;
                         transition: all 0.3s ease;

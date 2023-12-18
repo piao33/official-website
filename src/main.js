@@ -1,5 +1,6 @@
 import './assets/css/main.css'
 import 'font-awesome/css/font-awesome.min.css';
+import 'element-plus/theme-chalk/display.css';
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
