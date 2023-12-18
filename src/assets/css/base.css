@@ -72,6 +72,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 body, html{
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
   background-color: #fff;
 }

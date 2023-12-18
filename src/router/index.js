@@ -4,21 +4,25 @@ const router = createRouter({
   base: '/',
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from ,savedPosition){
-    console.log(savedPosition)
-    if(savedPosition) {
+    console.log(to.fullPath, to.hash, savedPosition)
+    if (to.hash) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({el: to.hash,behavior: 'smooth',})
+        }, 100)
+      })
+    }
+    else if(savedPosition) {
       return savedPosition;
-    }else if (to.hash) {
-      return {
-        selector: to.hash
-      };
-    } else {
+    }
+    else {
       return { left: 0, top: 0 };
     }
   },
   routes: [
     {
       path: '',
-      redirect: '/web/about'
+      redirect: '/web/home'
     },
     {
       path: '/web',

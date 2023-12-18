@@ -9,7 +9,7 @@
             <p class="article">
                 公司在北京及长春均设立了数据标注基地，充分发挥了东北高校资源丰富的优势，同东北大学，长春大学，长春工业大学，吉林省交通职业技术学院等学校建立了长期合作，人才储备丰富，打造了一支经验丰富、专业素质高的数据标注团队，具备丰富的行业经验和专业知识。
             </p>
-            <img src="@/assets/img/company-license.jpg" alt="">
+            <img src="@/assets/img/company-license.jpg" class="license-img" alt="">
         </div>
         
 
@@ -42,7 +42,7 @@
             <p class="subtitle" >企业荣誉</p>
             <p class="article">
                 公司成立以来非常重视公司的管理能力，相继通过了质量管理体系、环境管理体系及安全管理体系认证，并且在国家重点支持的高新技术领域，持续进行研究开发与技术成果转化，形成企业核心自主知识产权，获得了高新技术企业认证。</p>
-            <el-row justify="center" :gutter="48" class="honor">
+            <el-row justify="center" :gutter="32" class="honor">
                 <el-col :sm="6" :xs="12">
                     <div class="honor-item">高企认证</div>
                 </el-col>
@@ -105,22 +105,8 @@ import { useRoute } from 'vue-router';
     const route = useRoute()
 
     onMounted(()=>{
-        console.log('mounted')
-    })
 
-    watch(
-        ()=> route.hash,
-        async (val)=>{
-            console.log('hash:', val)
-            if(!val)return;
-            await nextTick()
-            setTimeout(() => {
-                // console.log(document.querySelector(val).offsetTop)
-                window.scrollTo(0, document.querySelector(val).offsetTop - 80)
-            }, 60);
-        },
-        {immediate: true}
-    )
+    })
 </script>
 <style lang="less" scoped>
 .about-content {
@@ -132,10 +118,12 @@ import { useRoute } from 'vue-router';
     }
     .title {
         font-size: 32px;
-        padding: 50px 0;
         font-weight: 500;
+        padding-bottom: 30px;
     }
-
+    #introduce{
+        padding: @nav-height 0 50px;
+    }
     .subtitle {
         text-align: left;
         margin: 0 0 20px;
@@ -154,14 +142,24 @@ import { useRoute } from 'vue-router';
         text-align: left;
     }
 
-    img {
-        width: 70%;
+    .license-img {
+        width: 65%;
+        object-fit: cover;
         vertical-align: top;
     }
 
     .line {
-        border-top: 1px solid #eee;
-        margin: 50px 0;
+        // border-top: 1px solid #eee;
+        padding: @nav-height 0;
+        position: relative;
+        &::after{
+            content: '';
+            position: absolute;
+            left:0;top:@nav-height;
+            width: 100%;
+            height: 1px;
+            border-top: 1px solid #eee;
+        }
     }
 
     .culture {
