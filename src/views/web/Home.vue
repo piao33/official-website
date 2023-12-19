@@ -88,7 +88,7 @@
                         <li @click="preSlide"><i class="fa fa-arrow-left"></i></li>
                         <li @click="nextSlide"><i class="fa fa-arrow-right"></i></li>
                     </ul>
-                     <Swiper
+                    <Swiper
                         class="home-swiper"
                         :modules="modules"
                         :slides-per-view="perview_num"

@@ -87,14 +87,79 @@
                 数据定制服务（采集和标注）采用“自营定额+团队联盟”模式进行产能分配，力求在成本、效率和质量之间为用户找到理想的平衡点
             </p>
             <div class="boldline"></div>
+            <div class="tab" >
+                <p 
+                    v-for="(item,index) in data_list" :key="index"
+                    class="tab-title" 
+                    :class="{'active': index==choosedIndex}" 
+                    @click="choosedIndex = index"
+                >
+                    {{ item.name }}
+                    <i class="fa fa-caret-down" v-show="index==choosedIndex"></i>
+                </p>
+            </div>
+            <div class="subtab">
+                <p  
+                    v-for="(citem, cindex) in data_list[choosedIndex].children" 
+                    :key="cindex"
+                    class="sub-tab-title" 
+                    @click="choosedSubIndex = cindex"
+                    :class="{'subactive': cindex==choosedSubIndex}" 
+                >
+                    {{ citem.name }}
+                </p>
+            </div>
+            <div class="icon-con">
+                <ul class="icon-box">
+                    <li @click="slideTo(i)" v-for="(item,i) in swiper_list" class="icon-item" :class="{'active-icon': current_swiper == i}">
+                        <div class="imgbox">
+                            <img :src="current_swiper == i ? item.aicon : item.icon" alt="">
+                        </div>
+                        <p>{{ item.name }}</p>
+                    </li>
+                </ul>
+            </div>
+            <Swiper
+                class="product-swiper"
+                :modules="modules"
+                :slides-per-view="3"
+                :navigation="true"
+                :loop="true"
+                :speed="600"
+                @swiper="onSwiper"
+                @slideChange="onSlideChange"
+                :centeredSlides="true"
+                :centeredSlidesBounds="true"
+                
+            >
+                <swiper-slide v-for="(item, index) in swiper_list" :key="index" class="swiper-item">
+                    {{ '当前 index:'+index }}
+                    <img :src="item.img" alt="">
+                </swiper-slide>
+            </Swiper>
         </div>
+        <!-- :initial-slide="1"
+                spaceBetween="-50%"
+                effect="coverflow"
+                :centeredSlides="true"
+                :centeredSlidesBounds="true"
+                :observer="true"
+                :observeParents="false"
+                :coverflowEffect="{
+                    rotate: 0,
+                    stretch: 10,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: false
+                }" -->
 
         <div class="line"></div>
     </div>
 </template>
 <script setup>
+import {ref, computed} from 'vue'
 import {Swiper, SwiperSlide} from 'swiper/vue'
-import { safeHtml } from '@/utils';
+import { getAssetFile } from '@/utils';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -102,21 +167,131 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/controller';
 
- // let swiper_list = ref([])
+let choosedIndex = ref(0)
+let choosedSubIndex = ref(0)
+let mySwiper = ref(null)
+let current_swiper = ref(0)
+let modules = reactive([Navigation, Pagination, Autoplay]);
+
+const swiper_list = computed(()=>{
+    let list = data_list.value?.[choosedIndex.value]?.children?.[choosedSubIndex.value]?.children || []
+    console.log(list)
+    return list
+})
+
+const onSwiper = (v)=>{
+    console.log(v)
+    mySwiper.value = v;
+}
+const onSlideChange = (v)=>{
+    console.log(v)
+    current_swiper.value = v.realIndex
+}
+
+const slideTo = (index)=>{
+    console.log(index)
+    mySwiper.value.slideToLoop(index, 1000, false)
+}
+
+
+let data_list = ref([
+    {
+        name: '数据标注',
+        children: [
+            {
+                name: '计算机视觉',
+                children: [
+                    { name: '2D框',  aicon: getAssetFile('j1.png'), icon: getAssetFile('hj1.png'), img: getAssetFile('imgj1.png')},
+                    { name: '3D框',  aicon: getAssetFile('j2.png'), icon: getAssetFile('hj2.png'), img: getAssetFile('imgj2.png')},
+                    { name: '语意分割',  aicon: getAssetFile('j3.png'), icon: getAssetFile('hj3.png'), img: getAssetFile('imgj3.png')},
+                    { name: 'OCR转写',  aicon: getAssetFile('j4.png'), icon: getAssetFile('hj4.png'), img: getAssetFile('imgj4.png')},
+                    { name: '关键点',  aicon: getAssetFile('j5.png'), icon: getAssetFile('hj5.png'), img: getAssetFile('imgj5.png')},
+                    { name: '连续帧标注',  aicon: getAssetFile('j6.png'), icon: getAssetFile('hj6.png'), img: getAssetFile('imgj6.gif')},
+                    { name: '3D点云',  aicon: getAssetFile('j7.png'), icon: getAssetFile('hj7.png'), img: getAssetFile('imgj7.png')},
+                    { name: '传感器融合',  aicon: getAssetFile('j8.png'), icon: getAssetFile('hj8.png'), img: getAssetFile('imgj8.gif')},
+                ]
+            },
+            {
+                name: '语音识别',
+                children: [
+                    { name: '语音转录',  aicon: getAssetFile('yy1.png'), icon: getAssetFile('hyy1.png'), img: getAssetFile('imgyy1.png')},
+                    { name: '语音分割',  aicon: getAssetFile('yy2.png'), icon: getAssetFile('hyy2.png'), img: getAssetFile('imgyy2.png')},
+                    { name: '语音审核',  aicon: getAssetFile('yy3.png'), icon: getAssetFile('hyy3.png'), img: getAssetFile('imgyy3.png')},
+                ]
+            },
+            {
+                name: '自然语言处理',
+                children: [
+                    { name: '指代消歧',  aicon: getAssetFile('z1.png'), icon: getAssetFile('hz1.png'), img: getAssetFile('imgz1.png')},
+                    { name: '实体标注',  aicon: getAssetFile('z2.png'), icon: getAssetFile('hz2.png'), img: getAssetFile('imgz2.png')},
+                    { name: '翻译转写',  aicon: getAssetFile('z3.png'), icon: getAssetFile('hz3.png'), img: getAssetFile('imgz3.png')},
+                    { name: '分词标注',  aicon: getAssetFile('z4.png'), icon: getAssetFile('hz4.png'), img: getAssetFile('imgz4.png')},
+                    { name: '问答标注',  aicon: getAssetFile('z5.png'), icon: getAssetFile('hz5.png'), img: getAssetFile('imgz5.png')},
+                    { name: '关系抽取',  aicon: getAssetFile('z6.png'), icon: getAssetFile('hz6.png'), img: getAssetFile('imgz6.png')},
+                    { name: '文本摘要',  aicon: getAssetFile('z7.png'), icon: getAssetFile('hz7.png'), img: getAssetFile('imgz7.png')},
+                    { name: '拼写纠错',  aicon: getAssetFile('z8.png'), icon: getAssetFile('hz8.png'), img: getAssetFile('imgz8.png')},
+                ]
+            }
+        ]
+    },
+    {
+        name: '数据采集',
+        children: [
+            {
+                name: '图像数据采集',
+                children: [
+                    { name: '实物采集',  aicon: getAssetFile('t1.png'), icon: getAssetFile('ht1.png'), img: getAssetFile('imgt1.png')},
+                    { name: '路况采集',  aicon: getAssetFile('t2.png'), icon: getAssetFile('ht2.png'), img: getAssetFile('imgt2.png')},
+                    { name: '场景采集',  aicon: getAssetFile('t3.png'), icon: getAssetFile('ht3.png'), img: getAssetFile('imgt3.png')},
+                ]
+            },
+            {
+                name: '视频数据采集',
+                children: [
+                    { name: '路况采集',  aicon: getAssetFile('s1.png'), icon: getAssetFile('hs1.png'), img: getAssetFile('imgs1.png')},
+                    { name: '富媒体采集',  aicon: getAssetFile('s2.png'), icon: getAssetFile('hs2.png'), img: getAssetFile('imgs2.png')},
+                    { name: '监控数据',  aicon: getAssetFile('s3.png'), icon: getAssetFile('hs3.png'), img: getAssetFile('imgs3.png')},
+                    { name: '影视采集',  aicon: getAssetFile('s4.png'), icon: getAssetFile('hs4.png'), img: getAssetFile('imgs4.png')},
+                    { name: '新闻采集',  aicon: getAssetFile('s5.png'), icon: getAssetFile('hs5.png'), img: getAssetFile('imgs5.png')},
+                ]
+            },
+            {
+                name: '音频数据采集',
+                children: [
+                    { name: '语音采集',  aicon: getAssetFile('yp1.png'), icon: getAssetFile('hyp1.png'), img: getAssetFile('imgyp1.png')},
+                    { name: '场景采集',  aicon: getAssetFile('yp1.png'), icon: getAssetFile('hyp1.png'), img: getAssetFile('imgyp1.png')},
+                ]
+            }
+        ]
+    },
+])
 </script>
 <style lang="less" scoped>
     .product-content{
         .product-swiper{
             height: 500px;
-            margin-top: @nav-height-minus;
-
+            margin-top: 50px;
             --swiper-theme-color: @blue;/* 设置Swiper风格 */
-            --swiper-navigation-color: #fff;/* 单独设置按钮颜色 */
+            --swiper-navigation-color: #ccc;/* 单独设置按钮颜色 */
+            --swiper-navigation-backgroundColor: #fff;/* 单独设置按钮颜色 */
             --swiper-navigation-size: 50px; /* 设置按钮大小 */
             --swiper-pagination-color: #fff;
-
+            // &:deep(.swiper-button-next), &:deep(.swiper-button-prev){
+            //     background-color: #fff;
+            //     border-radius: 50%;
+            //     text-align: center;
+            //     width: 50px;height: 50px;
+            //     &::after{
+            //         // width: 20px;
+            //         // height: 20px;
+            //         font-size: 24px;
+            //         text-align: center;
+            //     }
+            // }
+            
             .swiper-item{
-                height: 100%;
+                width: 50%;
+                height: 460px;
                 img{
                     height: 100%;
                     width: 100%;
@@ -124,6 +299,24 @@ import 'swiper/css/controller';
                     object-fit: cover;
                 }
             }
+            // &:deep(.swiper-slide){
+            //     transform-origin: center;
+            //     transform: scale(1);
+            //     transition: all 0.3s ease;
+            // }
+            // &:deep(.swiper-slide-next){
+            //     transform-origin: center;
+            //     // transform: scale(0.9);
+            //     transition: all 0.3s ease;
+            // }
+            // &:deep(.swiper-slide-active){
+            //     transform-origin: center;
+            //     height: 500px;
+            //     transform:scale(1.2, 1);
+            //     z-index: 2;
+            //     transition: all 0.3s ease;
+            //     margin-top: 0;
+            // }
         }
 
         .con{
@@ -150,9 +343,9 @@ import 'swiper/css/controller';
         }
         .subtitle {
             text-align: center;
-            font-weight: 400;
-            color: #333;
-            font-size: 24px;
+            font-weight: 500;
+            color: #595959;
+            font-size: 22px;
             line-height: 24px;
             margin: 20px 0;
         }
@@ -186,13 +379,114 @@ import 'swiper/css/controller';
             text-align: center;
             padding: 0 10%;
             margin-bottom: 20px;
-            margin-top: -38px;
+            margin-top: -34px;
         }
         .boldline{
             background-color: #000;
-            height: 8px; width: 60px;
+            height: 7px; width: 60px;
             border-radius: 5px;
             margin: 0 auto;
+        }
+
+        .tab{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .tab-title{
+            font-size: 20px;
+            color: #666;
+            margin: 0 15px;
+            padding-bottom: 15px;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            i{
+                position: absolute;
+                left: 50%;bottom: -10px;
+                transform: translateX(-50%);
+                color: #3361c7;
+                font-size: 30px;
+            }
+        }
+        .active{
+            color: #3361c7;
+        }
+        .subtab{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .sub-tab-title{
+            max-width: 180px;
+            padding: 6px 24px;
+            border: 1px solid #3361c7;
+            border-radius: 30px;
+            text-align: center;
+            margin: 20px 15px 25px;
+            cursor: pointer;
+            color: #3361c7;
+            font-size: 18px;
+        }
+        .subactive{
+            background-color: #3361c7;
+            box-shadow: 0 3px 15px rgba(14,29,52,.06);
+            color: #fff;
+        }
+
+        .icon-con{
+            // text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+        .icon-box{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            overflow-x: scroll;
+            border-bottom: 2px solid #ccc;
+            .imgbox{
+                height: 50px;
+            }
+            &::-webkit-scrollbar{
+                height: 0px;
+                width:0;
+                background-color: #ccc;
+            }
+        }
+        .icon-item{
+            text-align: center;
+            min-width: 100px;
+            margin: 0 15px;
+            cursor: pointer;
+            img{
+                vertical-align: top;
+                object-fit: cover;
+            }
+            p{
+                font-size: 18px;
+                color: #5c6874;
+                padding: 22px 0;
+                position: relative;
+            }
+        }
+        .active-icon{
+            p{
+                color: #3361c7;
+                position: relative;
+                &::before{
+                    content: '';
+                    width: 100%;
+                    height: 4px;
+                    background-color: #3361c7;
+                    position: absolute;
+                    left:0;
+                    bottom: 0px;
+                    z-index: 2;
+                }
+            }
         }
     }
 </style>

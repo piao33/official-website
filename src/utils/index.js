@@ -18,3 +18,7 @@ export function safeHtml(text) {
 }
 // console.log(safeHtml('<<script src="a"></script>script src="abc"></scrip<script src="a"></script>t>'))
 // console.log(safeHtml('<p>faj</p><script src="hehihie"></script>'))
+
+export function getAssetFile(url) {
+    return new URL(`../assets/img/annotation/${url}`, import.meta.url).href
+}
