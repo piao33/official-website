@@ -119,59 +119,33 @@
                     </li>
                 </ul>
             </div>
-            <Swiper
-                class="product-swiper"
-                :modules="modules"
-                :slides-per-view="3"
-                :navigation="true"
-                :loop="true"
-                :speed="600"
-                @swiper="onSwiper"
-                @slideChange="onSlideChange"
-                :centeredSlides="true"
-                :centeredSlidesBounds="true"
-                
-            >
-                <swiper-slide v-for="(item, index) in swiper_list" :key="index" class="swiper-item">
-                    {{ '当前 index:'+index }}
-                    <img :src="item.img" alt="">
-                </swiper-slide>
-            </Swiper>
-        </div>
-        <!-- :initial-slide="1"
-                spaceBetween="-50%"
-                effect="coverflow"
-                :centeredSlides="true"
-                :centeredSlidesBounds="true"
-                :observer="true"
-                :observeParents="false"
-                :coverflowEffect="{
-                    rotate: 0,
-                    stretch: 10,
-                    depth: 100,
-                    modifier: 1,
-                    slideShadows: false
-                }" -->
 
+            <el-carousel 
+                ref="refcarousel"
+                class="product-swiper"
+                indicator-position="none"
+                arrow="always"
+                :autoplay="false" 
+                type="card" 
+                height="auto"
+                @change="onSlideChange"
+            >
+                <el-carousel-item :name="index+''" v-for="(item,index) in swiper_list" :key="index" class="swiper-item">
+                    <img :src="item.img"  alt="">
+                </el-carousel-item>
+            </el-carousel>
+
+        </div>
         <div class="line"></div>
     </div>
 </template>
 <script setup>
-import {ref, computed} from 'vue'
-import {Swiper, SwiperSlide} from 'swiper/vue'
+import {ref, computed, onMounted} from 'vue'
 import { getAssetFile } from '@/utils';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import 'swiper/css/controller';
 
 let choosedIndex = ref(0)
 let choosedSubIndex = ref(0)
-let mySwiper = ref(null)
 let current_swiper = ref(0)
-let modules = reactive([Navigation, Pagination, Autoplay]);
 
 const swiper_list = computed(()=>{
     let list = data_list.value?.[choosedIndex.value]?.children?.[choosedSubIndex.value]?.children || []
@@ -179,19 +153,20 @@ const swiper_list = computed(()=>{
     return list
 })
 
-const onSwiper = (v)=>{
-    console.log(v)
-    mySwiper.value = v;
-}
+onMounted(()=>{
+
+})
+
 const onSlideChange = (v)=>{
-    console.log(v)
-    current_swiper.value = v.realIndex
+    current_swiper.value = v
 }
+const refcarousel = ref()
 
 const slideTo = (index)=>{
-    console.log(index)
-    mySwiper.value.slideToLoop(index, 1000, false)
+    refcarousel.value.setActiveItem(index)
 }
+
+
 
 
 let data_list = ref([
@@ -248,11 +223,11 @@ let data_list = ref([
             {
                 name: '视频数据采集',
                 children: [
-                    { name: '路况采集',  aicon: getAssetFile('s1.png'), icon: getAssetFile('hs1.png'), img: getAssetFile('imgs1.png')},
-                    { name: '富媒体采集',  aicon: getAssetFile('s2.png'), icon: getAssetFile('hs2.png'), img: getAssetFile('imgs2.png')},
-                    { name: '监控数据',  aicon: getAssetFile('s3.png'), icon: getAssetFile('hs3.png'), img: getAssetFile('imgs3.png')},
-                    { name: '影视采集',  aicon: getAssetFile('s4.png'), icon: getAssetFile('hs4.png'), img: getAssetFile('imgs4.png')},
-                    { name: '新闻采集',  aicon: getAssetFile('s5.png'), icon: getAssetFile('hs5.png'), img: getAssetFile('imgs5.png')},
+                    { name: '路况采集',  aicon: getAssetFile('s1.png'), icon: getAssetFile('hs1.png'), img: getAssetFile('imgsp1.png')},
+                    { name: '富媒体采集',  aicon: getAssetFile('s2.png'), icon: getAssetFile('hs2.png'), img: getAssetFile('imgsp2.png')},
+                    { name: '监控数据',  aicon: getAssetFile('s3.png'), icon: getAssetFile('hs3.png'), img: getAssetFile('imgsp3.png')},
+                    { name: '影视采集',  aicon: getAssetFile('s4.png'), icon: getAssetFile('hs4.png'), img: getAssetFile('imgsp4.png')},
+                    { name: '新闻采集',  aicon: getAssetFile('s5.png'), icon: getAssetFile('hs5.png'), img: getAssetFile('imgsp5.png')},
                 ]
             },
             {
@@ -269,54 +244,18 @@ let data_list = ref([
 <style lang="less" scoped>
     .product-content{
         .product-swiper{
-            height: 500px;
             margin-top: 50px;
-            --swiper-theme-color: @blue;/* 设置Swiper风格 */
-            --swiper-navigation-color: #ccc;/* 单独设置按钮颜色 */
-            --swiper-navigation-backgroundColor: #fff;/* 单独设置按钮颜色 */
-            --swiper-navigation-size: 50px; /* 设置按钮大小 */
-            --swiper-pagination-color: #fff;
-            // &:deep(.swiper-button-next), &:deep(.swiper-button-prev){
-            //     background-color: #fff;
-            //     border-radius: 50%;
-            //     text-align: center;
-            //     width: 50px;height: 50px;
-            //     &::after{
-            //         // width: 20px;
-            //         // height: 20px;
-            //         font-size: 24px;
-            //         text-align: center;
-            //     }
-            // }
             
             .swiper-item{
-                width: 50%;
-                height: 460px;
+                height: auto;
+                text-align: center;
                 img{
-                    height: 100%;
                     width: 100%;
+                    border-radius: 10px;
                     vertical-align: top;
                     object-fit: cover;
                 }
             }
-            // &:deep(.swiper-slide){
-            //     transform-origin: center;
-            //     transform: scale(1);
-            //     transition: all 0.3s ease;
-            // }
-            // &:deep(.swiper-slide-next){
-            //     transform-origin: center;
-            //     // transform: scale(0.9);
-            //     transition: all 0.3s ease;
-            // }
-            // &:deep(.swiper-slide-active){
-            //     transform-origin: center;
-            //     height: 500px;
-            //     transform:scale(1.2, 1);
-            //     z-index: 2;
-            //     transition: all 0.3s ease;
-            //     margin-top: 0;
-            // }
         }
 
         .con{
