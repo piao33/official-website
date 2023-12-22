@@ -87,7 +87,6 @@
     }
 
     const onRouterClick = (path) => {
-        console.log('xxxxx')
         router.push({path})
         drawer_visible.value = false;
     }

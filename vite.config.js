@@ -11,16 +11,7 @@ const pathSrc = fileURLToPath(new URL('./src', import.meta.url))
 // https://vitejs.dev/config/
 export default defineConfig({
   server:{
-    // host: "192.168.1.16",
-    // port: '8080',
-    // port: '8080',
-    // proxy:{
-    //   '/profile': {
-    //     target: '192.168.1.17:8080',
-    //     changeOrigin: true,
-    //     // rewrite: ''
-    //   }
-    // }
+    host: "127.0.0.1"
   },
   build: {
     rollupOptions: {

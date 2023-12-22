@@ -4,7 +4,6 @@ const router = createRouter({
   base: '/',
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from ,savedPosition){
-    console.log(to.fullPath, to.hash, savedPosition)
     if (to.hash) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {

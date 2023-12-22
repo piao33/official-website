@@ -154,7 +154,6 @@ function setPreviewNum() {
 }
 let mySwiper = ref(null)
 const onSwiper = (v)=>{
-    console.log(v)
     mySwiper.value = v;
 }
 const onSlideChange = (v)=>{

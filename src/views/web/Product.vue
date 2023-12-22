@@ -44,7 +44,7 @@
                     <p class="article">全业务统一数据中心是企业现有数据中心的进一步发展和完善，不仅能够帮助企业完善现有的数据中心，还能够帮助未建设数据中心的企业已新的模式来规划和建设数据中心，全业务统一数据中心主要包括数据管理域、数据分析域和数据处理域三部分。</p>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="8">
-                    <img class="service-img" src="@/assets/img/datacenter.png" alt="">
+                    <img class="service-img mgtop40" src="@/assets/img/datacenter.png" alt="">
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="8">
                     <p class="article">模型规范统一，通过强化统一数据模型与企业级主数据的全面应用与管控，保证数据的一致性与可共享。</p>
@@ -53,7 +53,7 @@
                 </el-col>
             </el-row>
             <div class="line-sm"></div>
-            <el-row justify="space-between" :gutter="20">
+            <el-row justify="space-between" :gutter="20" align="middle">
                 <el-col :xs="24" :sm="24" :md="16">
                     <el-row>
                         <el-col :xs="24" :sm="24" :md="24">
@@ -62,12 +62,8 @@
                         <el-col :xs="24" :sm="24" :md="24">
                             <img class="service-img" src="@/assets/img/marketing.png" alt="">
                         </el-col>
-                        <!-- <p class="article">中东华科数字化营销中台，实现自动化营销和智能化运营，系统聚焦四个方面的能力建设：数字化的营运管理能力、客户分析和洞察能力、多渠道协同的客户触达能力、营销自动化的能力和闭环评估的能力， 帮助企业提升数字化的业务能力，实现营销体系的数字化转型。解决方案具备完整的数字化营销产品组件，包括客户经营平台、客户画像、营销平台、自动建模、决策引擎、权益积分、企微通等，是一套完整的综合解决方案。</p> -->
                     </el-row>
                 </el-col>
-                <!-- <el-col :xs="24" :sm="24" :md="10">
-                    <img class="service-img" src="@/assets/img/marketing.png" alt="">
-                </el-col> -->
                 <el-col :xs="24" :sm="24" :md="8">
                     <p class="article bottom-20">智能决策与推荐<br/>
 按照客户生命周期旅程内置了不同阶段的典型客群的决策规则，方便营销人员发现并分析典型的营销客群，同时可以通过配置不同的营销规则并在决策引擎的支撑下实现针对不同特征客户的个性化营销决策与推荐。</p>
@@ -124,10 +120,10 @@
                 ref="refcarousel"
                 class="product-swiper"
                 indicator-position="none"
-                arrow="always"
+                arrow="hover"
                 :autoplay="false" 
                 type="card" 
-                height="auto"
+                :height="carouselHeight"
                 @change="onSlideChange"
             >
                 <el-carousel-item :name="index+''" v-for="(item,index) in swiper_list" :key="index" class="swiper-item">
@@ -137,6 +133,31 @@
 
         </div>
         <div class="line"></div>
+
+        <div class="con">
+            <p class="title">服务特色</p>
+            <div class="boldline mtop-20"></div>
+            <el-row :gutter="32" justify="space-between" class="m60">
+                <el-col v-for="(item, index) in feature_list" :xs="24" :sm="12" :md="6" class="feature">
+                    <img :src="item.img" alt="">
+                    <p>{{ item.title }}</p>
+                    <div>{{ item.desc }}</div>
+                </el-col>
+            </el-row>
+        </div>
+
+        <div class="process">
+            <div class="con">
+                <p class="title">服务流程</p>
+                <div class="boldline mtop-20"></div>
+                <el-row justify="center">
+                    <el-col  :xs="24" :sm="20" class="process-box">
+                        <p>数据标注与采集服务流程</p>
+                        <img src="@/assets/img/annotation/process.png" alt="">
+                    </el-col>
+                </el-row>
+            </div>
+        </div>
     </div>
 </template>
 <script setup>
@@ -149,12 +170,7 @@ let current_swiper = ref(0)
 
 const swiper_list = computed(()=>{
     let list = data_list.value?.[choosedIndex.value]?.children?.[choosedSubIndex.value]?.children || []
-    console.log(list)
     return list
-})
-
-onMounted(()=>{
-
 })
 
 const onSlideChange = (v)=>{
@@ -167,7 +183,12 @@ const slideTo = (index)=>{
 }
 
 
-
+let feature_list = ref([
+    {title: '高度数据安全性', img: getAssetFile('feature-1.png'), desc: '数据中心实施24小时360度监控+严格的流程管理+私有化部署工具+交付即焚机制'},
+    {title: '数据标注质量高', img: getAssetFile('feature-2.png'), desc: '2000余名专职数据标注师+培训上岗机制+双重质检机制'},
+    {title: '项目工期有保障', img: getAssetFile('feature-3.png'), desc: 'AI 辅助标注加速工具提升效率+动态产能分配机制'},
+    {title: '更低的项目成本', img: getAssetFile('feature-4.png'), desc: '自营标注团队+半自动化高效标注工具'},
+])
 
 let data_list = ref([
     {
@@ -240,6 +261,12 @@ let data_list = ref([
         ]
     },
 ])
+let carouselHeight = ref('386px')
+onMounted(()=>{
+    setTimeout(() => {
+        carouselHeight.value = 'auto'
+    }, 5000);
+})
 </script>
 <style lang="less" scoped>
     .product-content{
@@ -304,7 +331,9 @@ let data_list = ref([
             width: 100%;
             vertical-align: top;
             object-fit: cover;
-            margin: 16px 0;
+        }
+        .mgtop40{
+            margin-top: 40px;
         }
 
         .line {
@@ -325,6 +354,12 @@ let data_list = ref([
             height: 7px; width: 60px;
             border-radius: 5px;
             margin: 0 auto;
+        }
+        .m60{
+            margin: 60px 0;
+        }
+        .mtop-20{
+            margin-top: -20px;
         }
 
         .tab{
@@ -425,6 +460,59 @@ let data_list = ref([
                     bottom: 0px;
                     z-index: 2;
                 }
+            }
+        }
+
+        .feature{
+            text-align: center;
+            img{
+                height: 60px;
+                vertical-align: top;
+                object-fit: cover;
+            }
+            p{
+                font-size: 20px;
+                font-weight: bolder;
+                color: #333;
+                margin: 20px 0;
+            }
+            div{
+                font-size: 16px;
+                color: #333;
+                text-align: center;
+            }
+        }
+
+        .process{
+            background: #f5f7f9;
+            padding: 40px 0 100px;
+        }
+        .process-box{
+            padding: 40px;
+            margin: 30px 0;
+            border: 2px dashed #b1bed1;
+            background-color: #fff;
+            p{
+                font-size: 24px;
+                font-weight: 700;
+                color: #3361c7;
+                margin-bottom: 45px;
+            }
+            img{
+                width: 100%;
+                vertical-align: top;
+            }
+        }
+
+        .product-swiper :deep(.el-carousel__arrow){
+            // background: #fff;
+            // color: #939393;
+            background-color: rgba(0,0,0,0.3);
+            width: 50px;
+            height: 50px;
+            font-size: 32px;
+            &:hover{
+                background-color: rgba(0,0,0,0.5);
             }
         }
     }
