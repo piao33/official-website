@@ -255,7 +255,7 @@ let data_list = ref([
                 name: '音频数据采集',
                 children: [
                     { name: '语音采集',  aicon: getAssetFile('yp1.png'), icon: getAssetFile('hyp1.png'), img: getAssetFile('imgyp1.png')},
-                    { name: '场景采集',  aicon: getAssetFile('yp1.png'), icon: getAssetFile('hyp1.png'), img: getAssetFile('imgyp1.png')},
+                    { name: '场景采集',  aicon: getAssetFile('yp2.png'), icon: getAssetFile('hyp2.png'), img: getAssetFile('imgyp2.png')},
                 ]
             }
         ]
