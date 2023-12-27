@@ -56,6 +56,14 @@
                     <div class="honor-item">ISO18001</div>
                 </el-col>
             </el-row>
+            <el-row :gutter="32" class="honor_img">
+                <el-col :xs="24" :sm="12">
+                    <img src="@/assets/img/honor_a.jpg" alt="">
+                </el-col>
+                <el-col :xs="24" :sm="12">
+                    <img src="@/assets/img/honor_b.jpg" alt="">
+                </el-col>
+            </el-row>
         </div>
 
         <div class="line"></div>
@@ -191,6 +199,14 @@ import { useRoute } from 'vue-router';
         font-weight: 400;
     }
 
+    .honor_img{
+        margin-top: 24px;
+        img{
+            width: 80%;
+            vertical-align: top;
+            object-fit: cover;
+        }
+    }
     .recruit{
         text-align: left;
         margin-bottom: 50px;
