@@ -22,3 +22,14 @@ export function safeHtml(text) {
 export function getAssetFile(url) {
     return new URL(`../assets/img/annotation/${url}`, import.meta.url).href
 }
+
+// 给服务器图片拼接前缀
+export function splicingImageUrl(url) {
+    if(!url){
+        return url;
+    } else if(url.indexOf('http') != -1) {
+        return url;
+    }else {
+        return import.meta.env.VITE_SERVER_IMAGE_URL + url;
+    }
+}

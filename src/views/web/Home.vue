@@ -118,6 +118,7 @@ import { partnerListApi }  from '@/api/partner';
 import {Swiper, SwiperSlide} from 'swiper/vue'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useRouter } from 'vue-router';
+import { splicingImageUrl } from '@/utils';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -138,6 +139,9 @@ onMounted(async ()=>{
 })
 async function getPartnerList() {
     let {rows=[], code} = await partnerListApi()
+    rows.forEach(item=> {
+        item.partnersPath = splicingImageUrl(item.partnersPath);
+    })
     partner_list.value = rows;
 }
 function setPreviewNum() {

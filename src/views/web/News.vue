@@ -31,6 +31,7 @@
     import { onActivated, ref } from 'vue';
     import { useRouter } from 'vue-router';
     import { getNewsListApi }  from '@/api/news';
+    import { splicingImageUrl } from '@/utils';
     import default1 from '@/assets/img/default1.jpg';
     import default2 from '@/assets/img/default2.jpg';
     import default3 from '@/assets/img/default3.jpg';
@@ -70,6 +71,9 @@
             pageNum: pageNo.value,
             pageSize: pageSize.value
         });
+        rows.forEach(item=> {
+            item.thumbnail = splicingImageUrl(item.thumbnail);
+        })
         news_list.value = rows;
         totalCount.value = total;
     }

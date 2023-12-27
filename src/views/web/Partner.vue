@@ -12,6 +12,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { partnerListApi }  from '@/api/partner';
+import { splicingImageUrl } from '@/utils';
 
 const partner_list = ref([])
 
@@ -21,6 +22,9 @@ onMounted(async ()=>{
 
 async function getPartnerList() {
     let {rows=[], code} = await partnerListApi()
+    rows.forEach(item=> {
+        item.partnersPath = splicingImageUrl(item.partnersPath);
+    })
     partner_list.value = rows;
 }
 </script>
