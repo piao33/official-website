@@ -6,7 +6,7 @@
                     <el-col :xs="24" :md="18" :lg="12">
                         <h3>北京中动华科信息技术有限公司</h3>
                         <p>北京中动华科信息技术有限公司于2020年通过了ISO9001质量管理体系认证，是一家专业的数据标注服务提供商，致力于为客户提供高质量、高准确性的数据标注解决方案。公司拥有一支经验丰富、专业素质高的数据标注团队，具备丰富的行业经验和专业知识。公司在北京及长春均设立了数据标注基地，充分发挥了东北高校资源丰富的优势，同东北大学，长春大学，长春工业大学，吉林省交通职业技术学院等学校建立了长期合作，人才储备丰富，打造了一支经验丰富、专业素质高的数据标注团队，具备丰富的行业经验和专业知识。</p>
-                        <div class="btn"><span>查看更多</span></div>
+                        <div class="btn" @click="goAbout"><span>查看更多</span></div>
                     </el-col>
                 </el-row>
             </el-col>
@@ -117,11 +117,12 @@ import { reactive, ref, onMounted } from 'vue';
 import { partnerListApi }  from '@/api/partner';
 import {Swiper, SwiperSlide} from 'swiper/vue'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { useRouter } from 'vue-router';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-
+let router = useRouter()
 const partner_list = ref([])
 
 let perview_num = ref(1);
@@ -151,6 +152,9 @@ function setPreviewNum() {
     while(partner_list.value.length && partner_list.value.length < perview_num.value * 2) {
         partner_list.value = partner_list.value.concat(partner_list.value)
     }
+}
+const goAbout = ()=> {
+    router.push({path: '/web/about'})
 }
 let mySwiper = ref(null)
 const onSwiper = (v)=>{
