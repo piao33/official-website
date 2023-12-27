@@ -32,7 +32,7 @@
         .max1200();
         .marginAuto();
         .title-box{
-            text-align: left;
+            text-align: center;
             overflow: hidden;
             margin-bottom: 32px;
             .title{
@@ -46,6 +46,7 @@
                 font-size: 12px;
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 img{
                     width: 12px;height:12px;
                     vertical-align: top;
