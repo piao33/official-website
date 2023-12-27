@@ -3,7 +3,7 @@
     <div class="newsDetail">
         <div class="title-box">
             <p class="title">{{ detail.title }}</p>
-            <p class="tag">
+            <p class="tag" v-show="detail.createDate">
                 <span class="time">{{ detail.createDate }}</span>
                 <img src="@/assets/svg/view.svg" alt="浏览量" title="浏览量">
                 <span title="浏览量">{{ detail.browseNum }}</span>

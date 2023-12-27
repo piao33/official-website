@@ -11,7 +11,7 @@ const pathSrc = fileURLToPath(new URL('./src', import.meta.url))
 // https://vitejs.dev/config/
 export default defineConfig({
   server:{
-    host: "127.0.0.1"
+    host: "192.168.1.17"
   },
   build: {
     rollupOptions: {
