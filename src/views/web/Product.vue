@@ -53,23 +53,19 @@
                 </el-col>
             </el-row>
             <div class="line-sm"></div>
-            <el-row justify="space-between" :gutter="20" align="middle">
-                <el-col :xs="24" :sm="24" :md="16">
-                    <el-row>
-                        <el-col :xs="24" :sm="24" :md="24">
-                            <p class="article">中东华科数字化营销中台，实现自动化营销和智能化运营，系统聚焦四个方面的能力建设：数字化的营运管理能力、客户分析和洞察能力、多渠道协同的客户触达能力、营销自动化的能力和闭环评估的能力， 帮助企业提升数字化的业务能力，实现营销体系的数字化转型。解决方案具备完整的数字化营销产品组件，包括客户经营平台、客户画像、营销平台、自动建模、决策引擎、权益积分、企微通等，是一套完整的综合解决方案。</p>
-                        </el-col>
-                        <el-col :xs="24" :sm="24" :md="24">
-                            <img class="service-img" src="@/assets/img/marketing.png" alt="">
-                        </el-col>
-                    </el-row>
+            <el-row justify="center" :gutter="20" align="middle">
+                <el-col :span="24">
+                    <p class="article">中东华科数字化营销中台，实现自动化营销和智能化运营，系统聚焦四个方面的能力建设：数字化的营运管理能力、客户分析和洞察能力、多渠道协同的客户触达能力、营销自动化的能力和闭环评估的能力， 帮助企业提升数字化的业务能力，实现营销体系的数字化转型。解决方案具备完整的数字化营销产品组件，包括客户经营平台、客户画像、营销平台、自动建模、决策引擎、权益积分、企微通等，是一套完整的综合解决方案。</p>
                 </el-col>
-                <el-col :xs="24" :sm="24" :md="8">
-                    <p class="article bottom-20">智能决策与推荐<br/>
+                <el-col :span="24" align="center">
+                    <img class="marketing-img" src="@/assets/img/marketing.png" alt="">
+                </el-col>
+                <el-col :span="24">
+                    <p class="article bottom-20"><span class="bold">智能决策与推荐</span><br/>
 按照客户生命周期旅程内置了不同阶段的典型客群的决策规则，方便营销人员发现并分析典型的营销客群，同时可以通过配置不同的营销规则并在决策引擎的支撑下实现针对不同特征客户的个性化营销决策与推荐。</p>
-                    <p class="article bottom-20">营销流程可视化<br/>
+                    <p class="article bottom-20"><span class="bold">营销流程可视化</span><br/>
 平台所有营销的流程策划与渠道配置均通过可视化界面实现，方便营销人员完成营销流程的配置与管理，基于可配置的营销流程可实现多样性、多渠道、多波段的营销策划与执行。</p>
-                    <p class="article bottom-20">营销渠道低成本部署<br/>
+                    <p class="article bottom-20"><span class="bold">营销渠道低成本部署</span><br/>
 对营销场景的渠道端部署实现“即开即用” ，渠道营销资源由平台提供并更新，渠道与平台的互动处理逻辑也由平台进行控制，渠道端仅需要提供发布的窗口并调用统一的服务接口，方便渠道的接入和协同，极大降低了渠道改造难度和部署成本。</p>
                 </el-col>
             </el-row>
@@ -326,6 +322,17 @@ onMounted(()=>{
         }
         .bottom-20{
             margin-bottom: 20px;
+        }
+        .marketing-img{
+            vertical-align: top;
+            width: auto;
+            height: auto;
+            max-height: 400px;
+            max-width: 100%;
+            object-fit: cover;
+        }
+        .bold{
+            font-weight: 500;
         }
         .service-img{
             width: 100%;
